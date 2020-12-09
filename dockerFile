@@ -1,4 +1,4 @@
 FROM openjdk:8-alpine
-VOLUME C:\\study_workspace\\demo\\demo
-COPY target/demo-1.1.1-SNAPSHOT.jar demo-api.jar
+VOLUME /home
+COPY demo-1.1.1-SNAPSHOT.jar demo-api.jar
 ENTRYPOINT ["java","-jar","/demo-api.jar"]
