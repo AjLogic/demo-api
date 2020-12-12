@@ -35,6 +35,7 @@ public class MyController {
 			throw new RecordFoundException("Employee not found for id "+id);
 		}
 		Employee employee = new Employee();
+
 		employee.setName(id.toString());
 		URI locaUrl = ServletUriComponentsBuilder.fromCurrentRequest().path("{/{id}").buildAndExpand(id).toUri();
 		return ResponseEntity.created(locaUrl).body(employee);
