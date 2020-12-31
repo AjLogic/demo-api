@@ -1,0 +1,14 @@
+minikube start
+minikube dashboard
+docker login
+docker pull openjdk:8-alpine
+docker build -t 100490/aj-docker:demo-api-alpine -f dockerFile .
+docker tag 129f7a7975e6 100490/aj-docker:demo-api-alpine
+docker push 100490/aj-docker
+kubectl run k8s-demo --image 100490/aj-docker:demo-api-alpine --port  8080
+kubectl expose pods k8s-demo  --target-port 8080 --type NodePort
+
+kubectl create secret generic regcred --from-file=.dockerconfigjson=C:\Users\ajinkya.ranade\.docker\config.json --type=kubernetes.io/dockerconfigjson
+kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=100490 --docker-password=Ajinkya@1 --docker-email=ranade,ajinkya1@gmail.com
+kubectl get secret regcred --output=yaml
+kubectl apply -f  .\DeploymentAll.yml
